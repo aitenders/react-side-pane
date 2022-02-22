@@ -32,6 +32,7 @@ import styles from "./SidePane.css";
  * @param {boolean} hideBackdrop - Makes the backdrop transparent
  * @param {number} offset - Space (width in %) between parent and child when both are open
  * @param {boolean} open - Whether to display the pane
+ * @param {string} position - Side in which pane is created left or right
  * @param {object} style - Style object to pass to the pane
  * @param {number} width - Width of the pane in percentage. Max: 100.
  * @callback onActive - Callback from child to parent to pass on the child width on open
@@ -65,6 +66,7 @@ export default function SidePane({
 	onActive = null,
 	onClose,
 	open = false,
+	position = "right",
 	style = {},
 	width = 0,
 }) {
@@ -72,7 +74,7 @@ export default function SidePane({
 	const paneRef = useRef(null);
 	const paneContentRef = useRef(null);
 	const actualWidth = useRef(width);
-	const translateRef = useRef(getTranslateValue(actualWidth.current, 0, offset));
+	const translateRef = useRef(getTranslateValue(actualWidth.current, 0, offset, position));
 	const [active, setActive] = useState(false);
 	const DOMContainer = useMemo(
 		() => (containerId ? document.getElementById(containerId) : document.body),
@@ -121,7 +123,7 @@ export default function SidePane({
 			ariaHideContainer(appNodeId, "true");
 			ref.current?.setAttribute("aria-hidden", (!!childTranslateValue).toString());
 			updateTranslateValue(
-				getTranslateValue(actualWidth.current, childTranslateValue, offset)
+				getTranslateValue(actualWidth.current, childTranslateValue, offset, position)
 			);
 		},
 		[appNodeId, offset, updateTranslateValue]
@@ -142,7 +144,7 @@ export default function SidePane({
 		} else {
 			actualWidth.current = width;
 		}
-		updateTranslateValue(getTranslateValue(actualWidth.current, 0, offset));
+		updateTranslateValue(getTranslateValue(actualWidth.current, 0, offset, position));
 	};
 	const handleExiting = () => {
 		if (typeof onActive === "function") {
@@ -177,6 +179,7 @@ export default function SidePane({
 					disableBackdropClick={disableBackdropClick}
 					duration={duration}
 					hideBackdrop={hideBackdrop}
+					position={position}
 					style={backdropStyle || {}}
 					onClose={onClose}
 				>
@@ -192,6 +195,7 @@ export default function SidePane({
 						style={style || {}}
 						translateValue={translateRef.current}
 						width={width}
+						position={position}
 						onEnter={handleEnter}
 						onEntered={handleEntered}
 						onExited={handleExited}
@@ -232,6 +236,7 @@ SidePane.propTypes = {
 	onActive: PropTypes.func,
 	onClose: PropTypes.func.isRequired,
 	open: PropTypes.bool.isRequired,
+	position: PropTypes.string,
 	// eslint-disable-next-line react/forbid-prop-types
 	style: PropTypes.object,
 	width: PropTypes.number,

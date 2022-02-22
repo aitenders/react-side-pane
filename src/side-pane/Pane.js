@@ -6,11 +6,21 @@ import styles from "./SidePane.css";
 const defaultTransitionStyle = {
 	transform: "translateX(100%)",
 };
-const transitionStyles = {
-	entering: { transform: "translateX(100%)" },
-	entered: { transform: "translateX(0%)" },
-	exiting: { transform: "translateX(100%)" },
-	exited: { transform: "translateX(100%)" },
+const transitionStyles = (position) => {
+	if (position === "right") {
+		return {
+			entering: { transform: "translateX(100%)" },
+			entered: { transform: "translateX(0%)" },
+			exiting: { transform: "translateX(100%)" },
+			exited: { transform: "translateX(100%)" },
+		};
+	}
+	return {
+		entering: { transform: "translateX(-100%)" },
+		entered: { transform: "translateX(0%)" },
+		exiting: { transform: "translateX(-100%)" },
+		exited: { transform: "translateX(-100%)" },
+	};
 };
 const Pane = React.forwardRef(
 	(
@@ -27,6 +37,7 @@ const Pane = React.forwardRef(
 			onExited,
 			onExiting,
 			open,
+			position,
 			style,
 			translateValue,
 			width,
@@ -34,9 +45,12 @@ const Pane = React.forwardRef(
 		ref
 	) => {
 		const dynamicTransitionStyles = {
-			...transitionStyles,
-			entered: { transform: `translateX(+100%) translateX(-${translateValue}vw)` },
+			...transitionStyles(position),
+			entered: {
+				transform: `translateX(100%) translateX(-${translateValue}vw)`,
+			},
 		};
+
 		return (
 			<Transition
 				mountOnEnter

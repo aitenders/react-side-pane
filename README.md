@@ -17,6 +17,8 @@
 
 ## [Live Demo](https://codesandbox.io/s/react-side-pane-giu40)
 
+## [Editing SandBox](https://codesandbox.io/s/react-side-pane-forked-gkf64b)
+
 ## Getting started
 
 Install react-side-pane
@@ -118,6 +120,7 @@ const SidePaneContent = React.forwardRef(({ onActive }, ref) => {
 | onActive             | Callback from child to parent to pass on the child width on open     |       null       |
 | `onClose`            | Callback triggered on Escape or click on backdrop                    |    (required)    |
 | `open`               | Whether to display the pane                                          | false (required) |
+| position             | Side in which pane should be displayed "right" or "left"             |      "right"     |
 | style                | Style object to pass to the pane                                     |        {}        |
 | width                | Width of the pane in percentage. Max: 100.                           |      0 (%)       |
 
