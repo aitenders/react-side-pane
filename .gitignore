@@ -83,7 +83,6 @@ typings/
 .parcel-cache
 
 # rollup.js default build output
-dist/
 build/
 
 # Temporary folders
