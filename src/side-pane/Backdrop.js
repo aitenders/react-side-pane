@@ -9,6 +9,7 @@ export default function Backdrop({
 	duration,
 	hideBackdrop,
 	onClose,
+	position,
 	style,
 }) {
 	const backdropRef = useRef(null);
@@ -23,6 +24,7 @@ export default function Backdrop({
 		<div
 			ref={backdropRef}
 			aria-label="backdrop"
+			data-position={position}
 			className={`${styles.sidePane__backdrop} ${className}`}
 			data-disable-backdrop={disableBackdropClick}
 			data-hide-backdrop={hideBackdrop}

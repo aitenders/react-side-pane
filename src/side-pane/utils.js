@@ -1,9 +1,9 @@
-export function getTranslateValue(parentWidth, childWidth, offset) {
+export function getTranslateValue(parentWidth, childWidth, offset, position) {
 	let value = 0;
 	if (!childWidth) {
 		value = parentWidth;
 	} else if (childWidth >= parentWidth || parentWidth - childWidth < offset) {
-		value = childWidth + offset;
+		value = position === "right" ? childWidth + offset : childWidth - offset;
 	} else {
 		value = parentWidth;
 	}

@@ -22,7 +22,6 @@
 	flex-direction: row;
 	-webkit-box-pack: end;
 	-ms-flex-pack: end;
-	justify-content: flex-end;
 	height: inherit;
 	width: inherit;
 	cursor: pointer;
@@ -32,6 +31,12 @@
 	-o-transition: opacity 250ms ease-out;
 	transition: opacity 250ms ease-out;
 	background-color: rgba(0, 0, 0, 0.2);
+}
+.sidePane__backdrop[data-position="left"] {
+	justify-content: flex-start;
+}
+.sidePane__backdrop[data-position="right"] {
+	justify-content: flex-end;
 }
 .sidePane__backdrop[data-hide-backdrop="true"] {
 	background-color: transparent;

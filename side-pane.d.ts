@@ -97,6 +97,12 @@ interface SidePaneProps {
 	open: boolean;
 
 	/**
+	 * Side in which pane should be displayed
+	 * @default "right"
+	 */
+	position?: string;
+
+	/**
 	 * Style object to pass to the pane
 	 * @default {}
 	 */
